@@ -94,7 +94,7 @@
         .contact-form {
             display: none;
             position: fixed;
-            top: 20%;
+            top: 30%;
             left: 50%;
             transform: translate(-50%, -50%);
             background: #555;
@@ -146,6 +146,15 @@
             var form = document.getElementById("contactForm");
             form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
         }
+        function toggleTheme() {
+            document.body.classList.toggle("light-mode");
+            let themeButton = document.querySelector(".theme-toggle");
+            if (document.body.classList.contains("light-mode")) {
+                themeButton.textContent = "Dark Mode";
+            } else {
+                themeButton.textContent = "Light Mode";
+            }
+        }
     </script>
 </head>
 <body>
@@ -176,14 +185,13 @@
     <section id="contactForm" class="contact-form">
         <span class="close-btn" onclick="toggleContactForm()">&times;</span>
         <h2>Contact Me</h2>
-        <form action="https://formspree.io/f/xgvobbbk" method="POST" onsubmit="validateForm(event)">
+        <form action="https://formspree.io/f/xgvobbbk" method="POST">
             <input type="text" name="name" placeholder="Your Name" required>
             <input type="email" name="email" placeholder="Your Email" required>
             <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
             <div class="g-recaptcha" data-sitekey="6Lcnz-AqAAAAAGJGQskZY7p2HWiPFWfY4TvP21rq"></div>
             <button type="submit">Send</button>
         </form>
-        <p id="success-message" class="success-message">Message sent successfully!</p>
     </section>
 </body>
 </html>
