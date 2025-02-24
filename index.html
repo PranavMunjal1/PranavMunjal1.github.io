@@ -92,12 +92,16 @@
             margin-top: 20px;
         }
         .contact-form {
-            margin: 20px auto;
-            max-width: 600px;
-            padding: 20px;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: #555;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
         }
         .contact-form input, .contact-form textarea {
             width: 100%;
@@ -114,26 +118,9 @@
         }
     </style>
     <script>
-        function validateForm(event) {
-            event.preventDefault();
-            const emailInput = document.querySelector('input[name="email"]');
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(emailInput.value)) {
-                alert("Please enter a valid email address.");
-                return;
-            }
-            
-            const recaptchaResponse = grecaptcha.getResponse();
-            if (!recaptchaResponse) {
-                alert("Please verify that you are not a robot.");
-                return;
-            }
-            
-            document.getElementById("success-message").style.display = "block";
-            setTimeout(() => {
-                document.getElementById("success-message").style.display = "none";
-            }, 5000);
-            event.target.submit();
+        function toggleContactForm() {
+            var form = document.getElementById("contactForm");
+            form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
         }
     </script>
 </head>
@@ -148,11 +135,12 @@
                 <a href="https://github.com/PranavMunjal1" target="_blank">GitHub Profile</a>
                 <a href="https://www.linkedin.com/in/pranav-munjal-b2b70123b/" target="_blank">LinkedIn</a>
                 <a href="Pranav-Resume.pdf" target="_blank">Resume</a>
+                <a href="#" onclick="toggleContactForm()">Contact Me</a>
             </div>
         </div>
     </header>
 
-    <section class="contact-form">
+    <section id="contactForm" class="contact-form">
         <h2>Contact Me</h2>
         <form action="https://formspree.io/f/xgvobbbk" method="POST" onsubmit="validateForm(event)">
             <input type="text" name="name" placeholder="Your Name" required>
