@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pranav Munjal | Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,35 +91,51 @@
             padding: 10px;
             margin-top: 20px;
         }
-        .light-mode {
-            background-color: #f4f4f4;
-            color: black;
+        .contact-form {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+            background: #555;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .light-mode .projects {
-            background: white;
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
         }
-        .light-mode a {
-            color: #1877F2;
-        }
-        .light-mode a:hover {
-            color: #0056b3;
-        }
-        .typing {
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid;
-            width: 0;
-            animation: typing 3s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
-        }
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: white; }
+        .success-message {
+            display: none;
+            color: #28a745;
+            font-weight: bold;
+            margin-top: 10px;
         }
     </style>
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+            const emailInput = document.querySelector('input[name="email"]');
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(emailInput.value)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+            
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (!recaptchaResponse) {
+                alert("Please verify that you are not a robot.");
+                return;
+            }
+            
+            document.getElementById("success-message").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("success-message").style.display = "none";
+            }, 5000);
+            event.target.submit();
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -135,37 +152,16 @@
         </div>
     </header>
 
-    <section class="about">
-        <h2>About Me</h2>
-        <p>Hi, I'm Pranav Munjal, a passionate software engineer with experience in C++, Java, and Verilog. I specialize in backend development and low-level programming, and I'm always excited to learn and build innovative solutions.</p>
+    <section class="contact-form">
+        <h2>Contact Me</h2>
+        <form action="https://formspree.io/f/xgvobbbk" method="POST" onsubmit="validateForm(event)">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <div class="g-recaptcha" data-sitekey="6Lcnz-AqAAAAAGJGQskZY7p2HWiPFWfY4TvP21rq"></div>
+            <button type="submit">Send</button>
+        </form>
+        <p id="success-message" class="success-message">Message sent successfully!</p>
     </section>
-
-    <section class="projects">
-        <h2>C++ Projects</h2>
-        <ul>
-            <li><a href="https://github.com/PranavMunjal1/Array-Class" target="_blank">Project 1</a></li>
-            <li><a href="https://github.com/PranavMunjal1/Composers---C-" target="_blank">Project 2</a></li>
-            <li><a href="https://github.com/PranavMunjal1/Assignment-3---Movie-Database" target="_blank">Project 3</a></li>
-            <li><a href="https://github.com/PranavMunjal1/Assignment-4---Vending-Machine" target="_blank">Project 4</a></li>
-        </ul>
-
-        <h2>Java Projects</h2>
-        <ul>
-            <li><a href="https://github.com/PranavMunjal1/Java-Project---ArrayList" target="_blank">Project 1</a></li>
-            <li><a href="https://github.com/PranavMunjal1/SocialNetwork" target="_blank">Project 2</a></li>
-            <li><a href="https://github.com/PranavMunjal1/Tree" target="_blank">Project 3</a></li>
-        </ul>
-    </section>
-
-    <footer>
-        <p>© 2025 Pranav Munjal | <a href="https://github.com/PranavMunjal1" target="_blank">GitHub Profile</a></p>
-    </footer>
-
-    <script>
-        function toggleTheme() {
-            document.body.classList.toggle("light-mode");
-            document.querySelector(".theme-toggle").innerText = document.body.classList.contains("light-mode") ? "Dark Mode" : "Light Mode";
-        }
-    </script>
 </body>
 </html>
