@@ -12,11 +12,13 @@
             padding: 0;
             background-color: #f4f4f4;
             text-align: center;
+            transition: background 0.3s ease-in-out;
         }
         header {
             background: #4CAF50;
             color: white;
             padding: 20px;
+            position: relative;
         }
         .container {
             max-width: 800px;
@@ -33,6 +35,10 @@
             text-decoration: none;
             color: white;
             font-weight: bold;
+            transition: 0.3s;
+        }
+        .social-links a:hover {
+            color: #dfffd6;
         }
         .projects {
             background: white;
@@ -41,6 +47,10 @@
             max-width: 800px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        .projects:hover {
+            transform: scale(1.02);
         }
         h2 {
             color: #4CAF50;
@@ -56,9 +66,21 @@
             text-decoration: none;
             color: #4CAF50;
             font-weight: bold;
+            transition: color 0.3s;
         }
         a:hover {
             color: #388E3C;
+        }
+        .theme-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
         }
         footer {
             background: #333;
@@ -66,11 +88,25 @@
             padding: 10px;
             margin-top: 20px;
         }
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+        .dark-mode .projects {
+            background: #555;
+        }
+        .dark-mode a {
+            color: #90EE90;
+        }
+        .dark-mode a:hover {
+            color: #76c76c;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
+            <button class="theme-toggle" onclick="toggleTheme()">Dark Mode</button>
             <img src="profile.jpg" alt="Pranav Munjal" class="profile-pic">
             <h1>Pranav Munjal</h1>
             <p>Software Engineer | C++ | Java | Verilog | Web Development</p>
@@ -102,5 +138,11 @@
     <footer>
         <p>© 2025 Pranav Munjal | <a href="https://github.com/PranavMunjal1" target="_blank">GitHub Profile</a></p>
     </footer>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
 </body>
 </html>
