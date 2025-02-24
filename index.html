@@ -146,15 +146,6 @@
             var form = document.getElementById("contactForm");
             form.style.display = (form.style.display === "none" || form.style.display === "") ? "block" : "none";
         }
-        function toggleTheme() {
-            document.body.classList.toggle("light-mode");
-            let themeButton = document.querySelector(".theme-toggle");
-            if (document.body.classList.contains("light-mode")) {
-                themeButton.textContent = "Dark Mode";
-            } else {
-                themeButton.textContent = "Light Mode";
-            }
-        }
     </script>
 </head>
 <body>
